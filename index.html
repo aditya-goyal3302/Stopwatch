@@ -1,0 +1,157 @@
+<html>
+  <head>
+    <title>STOPWATCH BY ADITYA</title>
+    <style>
+      #timer{
+        color: #DF6E3C;
+        font-size: 80px;
+        text-align: center;
+        margin-top: 6%;
+        height: 90px;
+      }
+      #btns{
+        padding-top: 3%;
+        font-size: 24px;
+        display: block;
+        width:370px;
+        margin-right: auto;
+        margin-left: auto;
+        height: 81px;
+      }
+      button{
+        font-size: 18px;
+      }
+      .btn1{
+        background-color: rgba(241, 241, 241, 0.482);
+        color: #e7e7e7;
+        border-radius: 100%;
+        height: 80px;
+        width: 80px;
+        text-align: center;
+        border: 2px solid #555555;
+        opacity: .9;
+      }
+      .btn1:hover{
+        opacity: .8;
+      }
+      #start{
+        background-color: rgba(0, 128, 0, 0.800);
+        color: white;
+        border-radius: 100%;
+        height: 80px;
+        width: 80px;
+        text-align: center;
+        border: 2px solid green;
+        opacity: .9;
+      }
+      #stop{
+        background-color: #ff000055;
+        color: white;
+        border-radius: 100%;
+        height: 80px;
+        width: 80px;
+        text-align: center;
+        border: 2px solid #ff000055;
+      }
+      #start:hover{
+        background-color: rgba(0, 128, 0, 0.695);
+      }
+      #stop:hover{
+        background-color: #ff000080;
+      }
+      #stop:active,#start:active,.btn1:active{
+        opacity: 0.7;
+      }
+      #laps{
+        width:370px;
+        margin-top: 2%;
+        margin-right: auto;
+        margin-left: auto;
+        font-size: 20px;
+        border-bottom: 1px solid white;
+        border-color: grey;
+        height: 40px;
+        color: grey;
+      }
+    </style>
+  </head>
+  <body style="background-color:black; color: white; height: 100%">
+    <div id="timer"><span id="hh">01</span>:<span id="mm">01</span>:<span id="ss">01</span> </div>
+    
+    <div id="btns">
+      <span style="float: left;"><button class="btn1" id="reset" onclick="reset()">RESET</button></span>
+      <span style="float: left;"><button class="btn1" id="lap" onclick="lap()" style="display:none;">LAP</button></span>
+      <span style="float: right;"><button class="btn2" id="start" onclick="start()"> START </button></span>
+      <span style="float: right;"><button class="btn2" id="stop" onclick="stop()" style="display:none;"> STOP </button></span>
+    </div>
+
+    <div style="margin-top: 3%;" id="lap_div">
+      
+    </div>
+
+
+  </body>
+  <script>
+    var x;
+    var h=0, m=0, s=0, is,im,ih;
+    var laps=0;
+    var laploc = document.getElementById("lap_div");
+    var hh = document.getElementById("hh");
+    var mm = document.getElementById("mm");
+    var ss =  document.getElementById("ss");
+    function start(){
+      document.getElementById("start").style.display = 'none';
+      document.getElementById("reset").style.display = 'none';
+      document.getElementById("lap").style.display = 'block';
+      document.getElementById("stop").style.display = 'block';
+      x = setInterval(timer, 1000);
+    }
+    function timer(){
+      s++;
+      if(s>59){
+        m++;
+        s = 0;
+      }
+      if(m>59){
+        h++;
+        m = 0;
+      }
+      is=s,im=m,ih=h;
+      if (s < 10) {
+        is = "0" + s;
+      }
+      if (m < 10) {
+        im = "0" + m;
+      }
+      if (h < 10) {
+        ih = "0" + h
+      }
+      hh.innerHTML = ih;
+      mm.innerHTML = im;
+      ss.innerHTML = is;
+    }
+    function reset(){
+      document.getElementById("timer").innerHTML = "<span>00</span>:<span>00</span>:<span>00</span>";
+      document.getElementById("start").style.display = 'block';
+      document.getElementById("stop").style.display = 'none';
+      document.getElementById("lap_div").innerHTML= "";
+    }
+    function stop(){
+      document.getElementById("reset").style.display = 'block';
+      document.getElementById("lap").style.display = 'none';
+      clearInterval(x);
+    }
+    function lap(){
+      laps++;
+      
+      var n = document.createElement("div");
+      n.id = "laps";
+      n.innerHTML = '<span class="lap_a" style="float: left; margin-right: 30%;">Lap '+laps+'</span>'+
+          '<span class="lap_b" style="float: right;margin-left: 30%;">'+ih+':'+im+':'+is+'</span>';
+      laploc.appendChild(n);
+
+    }
+    var a = document.getElementById("timer").innerText;
+      //console.log(a);
+  </script>
+</html>
