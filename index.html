@@ -131,10 +131,13 @@
       ss.innerHTML = is;
     }
     function reset(){
-      document.getElementById("timer").innerHTML = "<span>00</span>:<span>00</span>:<span>00</span>";
+      hh.innerHTML = "00";
+      mm.innerHTML = "00";
+      ss.innerHTML = "00";
       document.getElementById("start").style.display = 'block';
       document.getElementById("stop").style.display = 'none';
       document.getElementById("lap_div").innerHTML= "";
+      h = m = s = 0;
     }
     function stop(){
       document.getElementById("reset").style.display = 'block';
